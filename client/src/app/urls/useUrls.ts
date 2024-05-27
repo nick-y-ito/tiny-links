@@ -1,9 +1,9 @@
 import { urlService } from "@/services/url.service";
-import { IUrl } from "@/types/url";
+import { UrlClient } from "@/types/url";
 import { useEffect, useState } from "react";
 
-export const useUrls = () => {
-	const [urls, setUrls] = useState<IUrl[]>([]);
+export const useUrlsPage = () => {
+	const [urls, setUrls] = useState<UrlClient[]>([]);
 
 	useEffect(() => {
 		async function fetchUrls() {
@@ -13,7 +13,7 @@ export const useUrls = () => {
 		fetchUrls();
 	}, []);
 
-	const deleteUrl = async (url: IUrl) => {
+	const deleteUrl = async (url: UrlClient) => {
 		setUrls((urls) => urls.filter((u) => u.hash !== url.hash));
 	};
 

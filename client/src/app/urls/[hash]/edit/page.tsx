@@ -1,5 +1,5 @@
 "use client";
-import { IUrl } from "@/types/url";
+import { useNewUrlPage } from "@/app/urls/[hash]/edit/useNewUrlPage";
 import { Link } from "@chakra-ui/next-js";
 import {
 	Box,
@@ -10,7 +10,6 @@ import {
 	Text,
 	VStack,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
 
 const TINY_BASE_URL = process.env.NEXT_PUBLIC_TINY_BASE_URL;
 
@@ -20,24 +19,21 @@ if (!TINY_BASE_URL) {
 
 interface IPageProps {
 	params: {
-		urlId: string;
+		hash: string;
 	};
 }
 
 export default function Page({ params }: IPageProps) {
-	const { urlId } = params;
-	const tinyUrl = `${TINY_BASE_URL}/u/${urlId}`;
+	const { hash } = params;
+	const tinyUrl = `${TINY_BASE_URL}/u/${hash}`;
 
-	const [url, setUrl] = useState<IUrl>();
+	const { url, newOrigUrl, handleInputChange, handleUpdate } = useNewUrlPage({
+		hash,
+	});
 
-	useEffect(() => {
-		setUrl({
-			hash: "aaaaa",
-			origUrl: "https://example.com",
-		});
-	}, []);
-
-	if (!url) return null;
+	if (!url) {
+		return null;
+	}
 
 	return (
 		<Box w={96}>
@@ -52,8 +48,10 @@ export default function Page({ params }: IPageProps) {
 				</HStack>
 				<VStack as="form" mt={4} w="100%" alignItems="stretch" textAlign="left">
 					<Heading fontSize="2xl">Edit URL</Heading>
-					<Input value={url.origUrl} />
-					<Button variant="solid">Save</Button>
+					<Input value={newOrigUrl} onChange={handleInputChange} />
+					<Button variant="solid" onClick={handleUpdate}>
+						Save
+					</Button>
 				</VStack>
 			</VStack>
 		</Box>

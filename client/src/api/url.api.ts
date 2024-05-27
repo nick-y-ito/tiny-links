@@ -32,6 +32,28 @@ export class UrlApi implements IUrlApi {
 		return response.json() as Promise<Url[]>;
 	}
 
+	async findUrl(hash: Url["hash"]): Promise<Url> {
+		const response = await fetch(`${API_URL}/urls/${hash}`);
+		if (!response.ok) {
+			throw new Error(`Failed to fetch URL: ${response.statusText}`);
+		}
+		return response.json() as Promise<Url>;
+	}
+
+	async updateUrl(hash: Url["hash"], newOrigUrl: Url["origUrl"]): Promise<Url> {
+		const response = await fetch(`${API_URL}/urls/${hash}`, {
+			method: "PATCH",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ newOrigUrl }),
+		});
+		if (!response.ok) {
+			throw new Error(`Failed to update URL: ${response.statusText}`);
+		}
+		return response.json() as Promise<Url>;
+	}
+
 	async deleteUrl(hash: Url["hash"]): Promise<Url> {
 		const response = await fetch(`${API_URL}/urls/${hash}`, {
 			method: "DELETE",

@@ -2,12 +2,12 @@
 import { UrlCard } from "@/components/UrlCard";
 import { Link } from "@chakra-ui/next-js";
 import { Box, Button, Heading } from "@chakra-ui/react";
-import { useUrls } from "@/app/urls/useUrls";
+import { useUrlsPage } from "@/app/urls/useUrls";
 
 interface IPageProps {}
 
 export default function Page({}: IPageProps) {
-	const { urls, deleteUrl } = useUrls();
+	const { urls, deleteUrl } = useUrlsPage();
 
 	return (
 		<Box w="90%" maxW="512px">

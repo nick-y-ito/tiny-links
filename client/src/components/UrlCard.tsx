@@ -1,5 +1,5 @@
 import { urlService } from "@/services/url.service";
-import { IUrl } from "@/types/url";
+import { UrlClient } from "@/types/url";
 import { Link } from "@chakra-ui/next-js";
 import { Button, Card, CardBody, HStack, VStack } from "@chakra-ui/react";
 
@@ -10,8 +10,8 @@ if (!TINY_BASE_URL) {
 }
 
 interface IUrlCardProps {
-	url: IUrl;
-	deleteUrl: (url: IUrl) => void;
+	url: UrlClient;
+	deleteUrl: (url: UrlClient) => void;
 }
 
 export const UrlCard = ({ url, deleteUrl }: IUrlCardProps) => {
