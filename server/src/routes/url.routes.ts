@@ -14,6 +14,6 @@ const urlController = new UrlController(urlService);
 
 urlRouter.get("/", urlController.findUrls.bind(urlController));
 urlRouter.post("/", urlController.createUrl.bind(urlController));
-urlRouter.get("/:urlId", urlController.findUrl.bind(urlController));
-urlRouter.post("/:urlId", urlController.updateUrl.bind(urlController));
-urlRouter.delete("", urlController.deleteUrl.bind(urlController));
+urlRouter.get("/:hash", urlController.findUrl.bind(urlController));
+urlRouter.patch("/:hash", urlController.updateUrl.bind(urlController));
+urlRouter.delete("/:hash", urlController.deleteUrl.bind(urlController));
