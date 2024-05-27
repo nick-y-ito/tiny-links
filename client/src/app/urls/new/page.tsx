@@ -1,16 +1,8 @@
 "use client";
-import { IUrl } from "@/types/url";
-import { Link } from "@chakra-ui/next-js";
-import {
-	Box,
-	Button,
-	Heading,
-	HStack,
-	Input,
-	Text,
-	VStack,
-} from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { urlService } from "@/services/url.service";
+import { Box, Button, Heading, Input, VStack } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
+import { ChangeEvent, FormEvent, useState } from "react";
 
 const TINY_BASE_URL = process.env.NEXT_PUBLIC_TINY_BASE_URL;
 
@@ -19,14 +11,47 @@ if (!TINY_BASE_URL) {
 }
 
 export default function Page() {
+	const router = useRouter();
+	const [newUrl, setNewUrl] = useState("");
+
+	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+		setNewUrl(e.target.value);
+	};
+
+	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		try {
+			await urlService.createUrl(newUrl);
+			router.push("/urls");
+		} catch (error) {
+			alert(`Failed to create URL. Please try again.`);
+		}
+	};
+
 	return (
 		<Box w={96}>
 			<VStack fontSize="sm" alignItems="flex-start">
-				<VStack as="form" mt={4} w="100%" alignItems="stretch" textAlign="left">
+				<Box
+					as="form"
+					mt={4}
+					w="100%"
+					display='flex'
+					flexDir="column"
+					gap={2}
+					alignItems="stretch"
+					textAlign="left"
+					onSubmit={handleSubmit}
+				>
 					<Heading fontSize="2xl">Create URL</Heading>
-					<Input />
-					<Button variant="solid">Create</Button>
-				</VStack>
+					<Input
+						placeholder="Enter URL"
+						value={newUrl}
+						onChange={handleChange}
+					/>
+					<Button type="submit" variant="solid">
+						Create
+					</Button>
+				</Box>
 			</VStack>
 		</Box>
 	);

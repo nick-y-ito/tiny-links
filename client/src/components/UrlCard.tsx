@@ -1,3 +1,4 @@
+import { urlService } from "@/services/url.service";
 import { IUrl } from "@/types/url";
 import { Link } from "@chakra-ui/next-js";
 import { Button, Card, CardBody, HStack, VStack } from "@chakra-ui/react";
@@ -10,9 +11,19 @@ if (!TINY_BASE_URL) {
 
 interface IUrlCardProps {
 	url: IUrl;
+	deleteUrl: (url: IUrl) => void;
 }
 
-export const UrlCard = ({ url }: IUrlCardProps) => {
+export const UrlCard = ({ url, deleteUrl }: IUrlCardProps) => {
+	const handleDelete = async () => {
+		try {
+			await urlService.deleteUrl(url.hash);
+			deleteUrl(url);
+		} catch (error) {
+			alert(`Failed to delete URL. Please try again.`);
+		}
+	};
+
 	return (
 		<Card>
 			<CardBody>
@@ -29,7 +40,9 @@ export const UrlCard = ({ url }: IUrlCardProps) => {
 						<Link href={`/urls/${url.hash}/edit`}>
 							<Button variant="ghost">Edit</Button>
 						</Link>
-						<Button variant="ghost">Delete</Button>
+						<Button variant="ghost" onClick={handleDelete}>
+							Delete
+						</Button>
 					</HStack>
 				</HStack>
 			</CardBody>
