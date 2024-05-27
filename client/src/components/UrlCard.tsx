@@ -24,13 +24,21 @@ export const UrlCard = ({ url, deleteUrl }: IUrlCardProps) => {
 		}
 	};
 
+	const tinyUrl = `${TINY_BASE_URL}/u/${url.hash}`;
+
 	return (
 		<Card>
 			<CardBody>
 				<HStack justifyContent="space-between">
 					<VStack align="start" gap={0}>
-						<Link href={`/urls/${url.hash}`} fontSize="lg" fontWeight="bold">
-							{TINY_BASE_URL}/u/{url.hash}
+						<Link
+							href={tinyUrl}
+							fontSize="lg"
+							fontWeight="bold"
+							rel="noopener noreferrer"
+							target="_blank"
+						>
+							{tinyUrl}
 						</Link>
 						<Link href={url.origUrl} color="gray.400" fontSize="sm" isExternal>
 							{url.origUrl}

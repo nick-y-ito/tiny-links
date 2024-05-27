@@ -40,11 +40,15 @@ export default function Page({ params }: IPageProps) {
 			<VStack fontSize="sm" alignItems="flex-start">
 				<HStack>
 					<Text color="gray.400">Tiny URL:</Text>
-					<Link href={tinyUrl}>{tinyUrl}</Link>
+					<Link href={tinyUrl} rel="noopener noreferrer" target="_blank">
+						{tinyUrl}
+					</Link>
 				</HStack>
 				<HStack>
 					<Text color="gray.400">Original URL:</Text>
-					<Link href={url.origUrl}>{url.origUrl}</Link>
+					<Link href={url.origUrl} rel="noopener noreferrer" target="_blank">
+						{url.origUrl}
+					</Link>
 				</HStack>
 				<VStack as="form" mt={4} w="100%" alignItems="stretch" textAlign="left">
 					<Heading fontSize="2xl">Edit URL</Heading>
