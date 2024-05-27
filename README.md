@@ -33,17 +33,17 @@ This is a demo application that allows users to shorten long URLs. My interest i
 ### Front-End
 
 ```bash
+cd client
 cp .env.example .env.local
 npm install
-cd client
 npm run dev
 ```
 
 ### Back-End
 
 ```bash
-cp .env.example .env
 cd server
+cp .env.example .env
 npx prisma migrate dev
 npm run dev
 ```
