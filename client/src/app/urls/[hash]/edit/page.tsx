@@ -25,8 +25,6 @@ interface IPageProps {
 
 export default function Page({ params }: IPageProps) {
 	const { hash } = params;
-	const tinyUrl = `${TINY_BASE_URL}/u/${hash}`;
-
 	const { url, newOrigUrl, handleInputChange, handleUpdate } = useNewUrlPage({
 		hash,
 	});
@@ -34,6 +32,8 @@ export default function Page({ params }: IPageProps) {
 	if (!url) {
 		return null;
 	}
+
+	const tinyUrl = `${TINY_BASE_URL}/u/${url.hash}`;
 
 	return (
 		<Box w={96}>
