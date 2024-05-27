@@ -18,15 +18,15 @@ export const UrlCard = ({ url }: IUrlCardProps) => {
 			<CardBody>
 				<HStack justifyContent="space-between">
 					<VStack align="start" gap={0}>
-						<Link href={`/urls/${url.urlId}`} fontSize="lg" fontWeight="bold">
-							{TINY_BASE_URL}/u/{url.urlId}
+						<Link href={`/urls/${url.hash}`} fontSize="lg" fontWeight="bold">
+							{TINY_BASE_URL}/u/{url.hash}
 						</Link>
 						<Link href={url.origUrl} color="gray.400" fontSize="sm" isExternal>
 							{url.origUrl}
 						</Link>
 					</VStack>
 					<HStack>
-						<Link href={`/urls/${url.urlId}/edit`}>
+						<Link href={`/urls/${url.hash}/edit`}>
 							<Button variant="ghost">Edit</Button>
 						</Link>
 						<Button variant="ghost">Delete</Button>

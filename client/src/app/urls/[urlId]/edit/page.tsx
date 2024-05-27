@@ -32,7 +32,7 @@ export default function Page({ params }: IPageProps) {
 
 	useEffect(() => {
 		setUrl({
-			urlId: "aaaaa",
+			hash: "aaaaa",
 			origUrl: "https://example.com",
 		});
 	}, []);

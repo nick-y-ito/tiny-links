@@ -1,5 +1,6 @@
 "use client";
 import { UrlCard } from "@/components/UrlCard";
+import { urlService } from "@/services/url.service";
 import { IUrl } from "@/types/url";
 import { Link } from "@chakra-ui/next-js";
 import { Box, Button, Heading } from "@chakra-ui/react";
@@ -11,10 +12,11 @@ export default function Page({}: IPageProps) {
 	const [urls, setUrls] = useState<IUrl[]>([]);
 
 	useEffect(() => {
-		setUrls([
-			{ urlId: "aaaaa", origUrl: "https://example.com" },
-			{ urlId: "bbbbb", origUrl: "https://example.org" },
-		]);
+		async function fetchUrls() {
+			const urls = await urlService.fetchUrls();
+			setUrls(urls);
+		}
+		fetchUrls();
 	}, []);
 
 	return (
@@ -27,7 +29,7 @@ export default function Page({}: IPageProps) {
 			</Box>
 			<Box display="flex" flexDir="column" mt={4} gap={2}>
 				{urls.map((url) => (
-					<UrlCard key={url.urlId} url={url} />
+					<UrlCard key={url.hash} url={url} />
 				))}
 			</Box>
 		</Box>

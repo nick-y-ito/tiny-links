@@ -1,4 +1,4 @@
 export interface IUrl {
-	urlId: string;
+	hash: string;
 	origUrl: string;
 }
