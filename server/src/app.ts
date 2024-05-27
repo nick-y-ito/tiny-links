@@ -14,8 +14,4 @@ app.use(
 app.use(express.json());
 app.use(morgan("combined"));
 
-app.get("/", (_, res) => {
-	res.send("Hello World!");
-});
-
 app.use("/urls", urlRouter);
