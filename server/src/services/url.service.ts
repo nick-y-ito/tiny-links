@@ -1,11 +1,11 @@
-import { IUrl } from "@/models/url.model";
 import { UrlRepository } from "@/repositories/url.repository";
 import { generateRandomHash } from "@/utils/hash";
+import { Url } from "@prisma/client";
 
 export class UrlService {
 	constructor(private urlRepository: UrlRepository) {}
 
-	async createUrl(origUrl: IUrl["origUrl"]) {
+	async createUrl(origUrl: Url["origUrl"]) {
 		const hash = generateRandomHash();
 		return this.urlRepository.createUrl(origUrl, hash);
 	}
@@ -14,15 +14,15 @@ export class UrlService {
 		return this.urlRepository.findUrls();
 	}
 
-	async findUrl(hash: IUrl["hash"]) {
+	async findUrl(hash: Url["hash"]) {
 		return this.urlRepository.findUrl(hash);
 	}
 
-	async updateUrl(hash: IUrl["hash"], origUrl: IUrl["origUrl"]) {
+	async updateUrl(hash: Url["hash"], origUrl: Url["origUrl"]) {
 		return this.urlRepository.updateUrl(hash, origUrl);
 	}
 
-	async deleteUrl(hash: IUrl["hash"]) {
+	async deleteUrl(hash: Url["hash"]) {
 		return this.urlRepository.deleteUrl(hash);
 	}
 }

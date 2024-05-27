@@ -1,5 +1,4 @@
-import { IUrl } from "@/models/url.model";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Url } from "@prisma/client";
 
 const DEFAULT_USER_ID = process.env.DEFAULT_USER_ID || "";
 
@@ -10,7 +9,7 @@ if (!DEFAULT_USER_ID) {
 export class UrlRepository {
 	constructor(private prisma: PrismaClient) {}
 
-	async createUrl(origUrl: IUrl["origUrl"], hash: IUrl["hash"]) {
+	async createUrl(origUrl: Url["origUrl"], hash: Url["hash"]) {
 		return this.prisma.url.create({
 			data: {
 				userId: DEFAULT_USER_ID,
@@ -24,7 +23,7 @@ export class UrlRepository {
 		return this.prisma.url.findMany();
 	}
 
-	async findUrl(hash: IUrl["hash"]) {
+	async findUrl(hash: Url["hash"]) {
 		return this.prisma.url.findUnique({
 			where: {
 				hash,
@@ -32,7 +31,7 @@ export class UrlRepository {
 		});
 	}
 
-	async updateUrl(hash: IUrl["hash"], origUrl: IUrl["origUrl"]) {
+	async updateUrl(hash: Url["hash"], origUrl: Url["origUrl"]) {
 		return this.prisma.url.update({
 			where: {
 				hash,
@@ -43,7 +42,7 @@ export class UrlRepository {
 		});
 	}
 
-	async deleteUrl(hash: IUrl["hash"]) {
+	async deleteUrl(hash: Url["hash"]) {
 		return this.prisma.url.delete({
 			where: {
 				hash,
