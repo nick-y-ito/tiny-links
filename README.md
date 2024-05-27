@@ -68,3 +68,5 @@ updatedAt: 2024-05-27T00:00:00.000+00:00
 
 ### How it works
 
+https://github.com/nick-y-ito/tiny-links/assets/99148565/d2c6dae0-8450-4643-9eb5-c3e14796e122
+
