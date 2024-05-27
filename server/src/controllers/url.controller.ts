@@ -43,7 +43,6 @@ export class UrlController {
 		if (!hash) {
 			return res.status(400).json({ message: "hash is required" });
 		}
-		console.log("controller", { hash });
 		const deletedUrl = await this.urlService.deleteUrl(hash);
 		return res.status(deletedUrl ? 200 : 404).json(deletedUrl);
 	}

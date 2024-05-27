@@ -23,7 +23,6 @@ export class UrlService {
 	}
 
 	async deleteUrl(hash: IUrl["hash"]) {
-		console.log("service", { hash });
 		return this.urlRepository.deleteUrl(hash);
 	}
 }

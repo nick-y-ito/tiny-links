@@ -44,7 +44,6 @@ export class UrlRepository {
 	}
 
 	async deleteUrl(hash: IUrl["hash"]) {
-		console.log("repository", { hash });
 		return this.prisma.url.delete({
 			where: {
 				hash,
